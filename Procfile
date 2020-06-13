@@ -1,0 +1,1 @@
+web: gunicorn rename.wsgi --log-file -
