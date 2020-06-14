@@ -2,11 +2,16 @@ from symbols.models import *
 from rest_framework import serializers
 
 
+class SymbolLimitedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Symbol
+        fields = ['id', 'name', 'latitude', 'longitude']
+
 class SymbolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Symbol
         exclude = ['approved']
-
+        depth = 1
 
 class HonoreeSerializer(serializers.ModelSerializer):
     class Meta:

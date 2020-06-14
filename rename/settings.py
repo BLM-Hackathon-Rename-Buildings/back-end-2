@@ -34,6 +34,7 @@ SECRET_KEY = '09%r2oat@t^#y7c5pyg#xwu%psp7(wk07&f_ixpl@#%)&$1q(f'
 
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['127.0.0.1','rename-reclaim.herokuapp.com']
 
 # Application definition

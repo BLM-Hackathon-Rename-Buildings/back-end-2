@@ -27,7 +27,8 @@ router.register(r'symbols', views.SymbolViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/symbols/all/', views.SymbolLimitedListView.as_view(), name='symbols_list'),
     path('api/', include(router.urls)),
     path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
-
+    
 ]
