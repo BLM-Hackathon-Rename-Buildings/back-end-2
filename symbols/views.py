@@ -5,12 +5,13 @@ from symbols.serializers import *
 
 
 
-class SymbolViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Symbol.objects.all().filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
+class SymbolDetailView(generics.RetrieveAPIView):
+    lookup_field = 'pk'
+    queryset = Symbol.objects.filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
     serializer_class = SymbolSerializer
 
 class SymbolLimitedListView(generics.ListAPIView):
-    queryset = Symbol.objects.all().filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
+    queryset = Symbol.objects.filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
     serializer_class = SymbolLimitedSerializer
 
 class HonoreeViewSet(viewsets.ReadOnlyModelViewSet):

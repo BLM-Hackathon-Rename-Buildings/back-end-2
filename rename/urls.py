@@ -22,11 +22,11 @@ from symbols import views
 router = routers.DefaultRouter()
 router.register(r'contacts', views.ContactViewSet)
 router.register(r'honorees', views.HonoreeViewSet)
-router.register(r'symbols', views.SymbolViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/symbols/all/', views.SymbolLimitedListView.as_view(), name='symbols_list'),
+    path(r'api/symbols/<int:pk>/', views.SymbolDetailView.as_view(), name='symbol_detail'),
     path('api/', include(router.urls)),
     path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
