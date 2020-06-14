@@ -5,7 +5,7 @@ from rest_framework import serializers
 class SymbolSerializer(serializers.ModelSerializer):
     class Meta:
         model = Symbol
-        exclude = ['approved']
+        fields = ['id', 'name', 'latitude', 'longitude']
 
 
 class HonoreeSerializer(serializers.ModelSerializer):

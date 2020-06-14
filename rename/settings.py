@@ -31,9 +31,10 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = '09%r2oat@t^#y7c5pyg#xwu%psp7(wk07&f_ixpl@#%)&$1q(f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = ['rename-reclaim.herokuapp.com']
+DEBUG = True
+
+ALLOWED_HOSTS = ['127.0.0.1','rename-reclaim.herokuapp.com']
 
 # Application definition
 
