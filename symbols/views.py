@@ -1,7 +1,7 @@
 # Create your views here.
 from symbols.models import * 
 from rest_framework.permissions import BasePermission, SAFE_METHODS
-from rest_framework import viewsets
+from rest_framework import viewsets, response, generics
 from symbols.serializers import *
 
 
@@ -10,19 +10,32 @@ class ReadOnly(BasePermission):
     def has_permission(self, request, view):
         return request.method in SAFE_METHODS
 
-class SymbolViewSet(viewsets.ModelViewSet):
-    permission_classes=[ReadOnly]
+class SymbolViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Symbol.objects.all().filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
+    serializer_class = SymbolSerializer
+
+    def get_object(self):
+        instance = super().get_object()
+
+        data = Symbol.objects.get(pk=instance.id).to_dict()
+        return response.Response(data)
+
+class SymbolDetailCustomView(generics.RetrieveAPIView):
     queryset = Symbol.objects.all().filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
     serializer_class = SymbolSerializer
 
 
-class HonoreeViewSet(viewsets.ModelViewSet):
-    permission_classes=[ReadOnly]
+    def get_object(self):
+        instance = super().get_object()
+
+        data = Symbol.objects.get(pk=instance.id).to_dict()
+        return response.Response(data)
+
+class HonoreeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Honoree.objects.all()
     serializer_class = HonoreeSerializer
 
 
-class ContactViewSet(viewsets.ModelViewSet):
-    permission_classes=[ReadOnly]
+class ContactViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
