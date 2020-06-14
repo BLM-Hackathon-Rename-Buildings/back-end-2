@@ -7,11 +7,11 @@ from symbols.serializers import *
 
 class SymbolDetailView(generics.RetrieveAPIView):
     lookup_field = 'pk'
-    queryset = Symbol.objects.filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
+    queryset = Symbol.objects.all()
     serializer_class = SymbolSerializer
 
 class SymbolLimitedListView(generics.ListAPIView):
-    queryset = Symbol.objects.filter(approved=True).filter(symbol_type="monument") #.filter(pk__lt=961)
+    queryset = Symbol.objects.all()
     serializer_class = SymbolLimitedSerializer
 
 class HonoreeViewSet(viewsets.ReadOnlyModelViewSet):
