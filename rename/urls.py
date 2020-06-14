@@ -29,5 +29,4 @@ urlpatterns = [
     path('api/symbols/all/', views.SymbolLimitedListView.as_view(), name='symbols_list'),
     path('api/', include(router.urls)),
     path('api_auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path(r'api/symbol/(?P<pk>[0-9]+)', views.SymbolDetailCustomView.as_view(), name='symbol_detail')
 ]
