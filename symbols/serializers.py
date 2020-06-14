@@ -5,7 +5,7 @@ from rest_framework import serializers
 class SymbolLimitedSerializer(serializers.ModelSerializer):
     class Meta:
         model = Symbol
-        fields = ['id', 'name', 'latitude', 'longitude']
+        fields = ['id', 'name', 'latitude', 'longitude', 'removed']
 
 class SymbolSerializer(serializers.ModelSerializer):
     class Meta:
