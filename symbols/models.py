@@ -74,10 +74,10 @@ class Symbol(models.Model):
     approved = models.BooleanField(default=False)
     removed = models.BooleanField(default=False)
 
-    photo = models.ImageField(null=True)
+    photo = models.ImageField(blank=True)
 
     contacts = models.ManyToManyField(Contact)
-    honoree = models.ForeignKey(Honoree, on_delete=models.PROTECT, null=True)
+    honoree = models.ForeignKey(Honoree, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return ("{0} — {1}, {2}".format(self.name, self.city, self.state))
