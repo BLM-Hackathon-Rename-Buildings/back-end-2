@@ -62,7 +62,7 @@ class Symbol(models.Model):
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     county = models.CharField(max_length=50)
-    zip_code = models.CharField(max_length=5, null=True)
+    zip_code = models.CharField(max_length=5, blank=True)
 
     latitude = models.DecimalField(max_digits=11, decimal_places=9)
     longitude = models.DecimalField(max_digits=12, decimal_places=9)
