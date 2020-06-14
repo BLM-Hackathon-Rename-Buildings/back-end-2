@@ -29,6 +29,9 @@ class Honoree(models.Model):
     description = models.TextField(blank=True)
     photo = models.ImageField(null=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Contact(models.Model): 
     name=models.CharField(max_length=50)
@@ -39,6 +42,19 @@ class Contact(models.Model):
     city=models.CharField(max_length=50)
     state=models.CharField(max_length=50)
     county=models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+    def to_dict(self): 
+        data_dict = {}
+
+        data_dict["name"]=self.name
+        data_dict["title"]=self.title
+        data_dict["email"]=self.email
+        data_dict["phone_number"]=self.phone_number
+
+        return data_dict
 
 # Create your models here.
 class Symbol(models.Model): 
@@ -62,6 +78,33 @@ class Symbol(models.Model):
 
     contacts = models.ManyToManyField(Contact)
     honoree = models.ForeignKey(Honoree, on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return ("{0} — {1}, {2}".format(self.name, self.city, self.state))
+
+    def to_dict(self): 
+        data_dict= {}
+
+        data_dict["id"] = self.pk
+
+        data_dict["name"] = self.name
+        data_dict["city"] = self.city
+        data_dict["state"] = self.state 
+        data_dict["county"] = self.county 
+        data_dict["latitude"] = self.latitude 
+        data_dict["longitude"] = self.longitude
+        data_dict["symbol_type"] = self.symbol_type 
+        data_dict["petition_link"] = self.petition_link
+        data_dict["photo"] = self.photo 
+        
+        data_dict["contacts"] = [c.to_dict() for c in self.contacts.all()]
+        if self.honoree: 
+            data_dict["honoree"] = self.honoree.name 
+
+        return data_dict
+
+
+
 
 
 
