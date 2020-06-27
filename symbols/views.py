@@ -10,6 +10,13 @@ class SymbolDetailView(generics.RetrieveAPIView):
     queryset = Symbol.objects.all()
     serializer_class = SymbolSerializer
 
+class SymbolZipListView(generics.ListAPIView):
+    serializer_class = SymbolSerializer
+
+    def get_queryset(self): 
+    	zip_code = self.kwargs['zip_code']
+    	return Symbol.objects.filter(zip_code=zip_code)
+
 class SymbolLimitedListView(generics.ListAPIView):
     queryset = Symbol.objects.all()
     serializer_class = SymbolLimitedSerializer
