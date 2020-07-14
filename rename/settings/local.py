@@ -14,6 +14,9 @@ import os
 import django_heroku
 import dj_database_url
 import dotenv
+from rename.settings.secret import *
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,9 +29,6 @@ if os.path.isfile(dotenv_file):
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '09%r2oat@t^#y7c5pyg#xwu%psp7(wk07&f_ixpl@#%)&$1q(f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -92,8 +92,11 @@ WSGI_APPLICATION = 'rename.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+DATABASES['default']['NAME'] = 'mydb'
+#DATABASES['default']['OPTIONS']['sslmode'] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -135,8 +138,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 # This should already be in your settings.py
 django_heroku.settings(locals())
 # This is new
-del DATABASES['default']['OPTIONS']['sslmode']
+#del DATABASES['default']['OPTIONS']['sslmode']
