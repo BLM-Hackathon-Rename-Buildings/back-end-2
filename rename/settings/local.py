@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'rename.wsgi.application'
 DATABASES = {}
 
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
 DATABASES['default']['NAME'] = 'mydb'
 #DATABASES['default']['OPTIONS']['sslmode'] = True
 
