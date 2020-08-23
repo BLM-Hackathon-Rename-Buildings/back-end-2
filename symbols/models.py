@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import *
+from django.utils import timezone
 
 
 SYMBOL_TYPES = (
@@ -30,7 +31,7 @@ class Honoree(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     photo = models.ImageField(null=True)
-    created_at = models.DateTimeField(default=datetime.now())
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
